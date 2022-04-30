@@ -20,6 +20,8 @@ private val SoccerAdapter = com.kurtoglu.soccerscorer.adapter.SoccerAdapter()
 private var eczaneNameList: ArrayList<String?> = arrayListOf()
 private var eczaneList: ArrayList<SoccerResponse.SoccerResponseItem> = arrayListOf()
 private lateinit var binding: ActivityMainBinding
+private var SoccerAPIService = com.kurtoglu.soccerscorer.service.SoccerAPIService()
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +30,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        SoccerAPIService.getMaclar()
+            .subscribeOn(Schedulers.newThread())
+            .subscribeWith(object : DisposableSingleObserver<SoccerResponse>() {
+                @RequiresApi(Build.VERSION_CODES.O)
+                override fun onSuccess(takimlar: SoccerResponse) {
+                    runOnUiThread {
+                        SoccerAdapter.setSoccerData(takimlar)
+                        Log.i("response", takimlar.toString())
+                    }
+                }
+                override fun onError(e: Throwable) {
+                    e.printStackTrace()
+                    Log.i("response", "hatalı")
+                }
+            })
 
 
 

@@ -19,7 +19,7 @@ class SoccerAPIService {
         .create(SoccerAPI::class.java)
 
     fun getMaclar(): Single<SoccerResponse> {
-        return api.getMaclar()
+        return api.getData()
     }
 
 }

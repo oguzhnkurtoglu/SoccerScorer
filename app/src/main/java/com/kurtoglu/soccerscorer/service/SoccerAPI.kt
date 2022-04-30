@@ -12,7 +12,4 @@ interface SoccerAPI {
     }
 
     @GET(MACLAR)
-    fun getMaclar() : Single<SoccerResponse>
-
-
-}
+    fun getData() : Single<SoccerResponse>}
