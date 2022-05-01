@@ -17,8 +17,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 private val SoccerAdapter = com.kurtoglu.soccerscorer.adapter.SoccerAdapter()
-private var eczaneNameList: ArrayList<String?> = arrayListOf()
-private var eczaneList: ArrayList<SoccerResponse.SoccerResponseItem> = arrayListOf()
+private var macList: ArrayList<SoccerResponse.SoccerResponseItem> = arrayListOf()
 private lateinit var binding: ActivityMainBinding
 private var SoccerAPIService = com.kurtoglu.soccerscorer.service.SoccerAPIService()
 
@@ -37,8 +36,19 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(takimlar: SoccerResponse) {
                     runOnUiThread {
                         SoccerAdapter.setSoccerData(takimlar)
+                        takimlar.forEach {
+
+                            macList.add(it)
+
+                        }
+                    }/*
+
+
+                        SoccerAdapter.setSoccerData(takimlar)
                         Log.i("response", takimlar.toString())
-                    }
+                        */
+
+
                 }
                 override fun onError(e: Throwable) {
                     e.printStackTrace()

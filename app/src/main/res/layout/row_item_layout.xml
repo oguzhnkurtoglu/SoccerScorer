@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_first_team"
@@ -11,7 +12,7 @@
         android:gravity="center"
         android:text="İlk Takım"
         android:textColor="@color/black"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/tv_second_team"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,24 +25,26 @@
         android:gravity="center"
         android:text="vs"
         android:textColor="#F44336"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_first_team" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_first_team"
+        app:layout_constraintBottom_toTopOf="@id/time"/>
+
     <TextView
         android:id="@+id/time"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="8dp"
         android:text="90''"
+        android:textAlignment="center"
         android:textColor="@color/purple_700"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/tv_second_team"
-        app:layout_constraintStart_toEndOf="@id/tv_first_team"
-        app:layout_constraintTop_toBottomOf="@id/vs"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_result"
+        app:layout_constraintTop_toBottomOf="@id/vs" />
 
     <TextView
         android:id="@+id/tv_second_team"
@@ -50,21 +53,34 @@
         android:gravity="center"
         android:text="İkinci Takım"
         android:textColor="@color/purple_700"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_first_team"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
+
     <TextView
         android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="1-1"
+        android:layout_marginStart="30dp"
+        android:gravity="start"
         android:textColor="@color/purple_700"
-        android:textSize="32dp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/tv_second_team"
-        app:layout_constraintStart_toEndOf="@id/tv_first_team"
-        app:layout_constraintTop_toBottomOf="@id/time" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time"
+        tools:ignore="RtlSymmetry" />
+    <View
+        android:id="@+id/row"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:background="#23D60707"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_result"
+        android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
