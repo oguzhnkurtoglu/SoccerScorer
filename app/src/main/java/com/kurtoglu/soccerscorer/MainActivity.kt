@@ -1,25 +1,20 @@
 package com.kurtoglu.soccerscorer
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kurtoglu.soccerscorer.adapter.SoccerAdapter
+import com.example.appretrofit.viewmodel.SoccerViewModel
 import com.kurtoglu.soccerscorer.databinding.ActivityMainBinding
 import com.kurtoglu.soccerscorer.model.SoccerResponse
-import com.kurtoglu.soccerscorer.service.SoccerAPI
-import com.kurtoglu.soccerscorer.service.SoccerAPIService
-import io.reactivex.observers.DisposableSingleObserver
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 private val SoccerAdapter = com.kurtoglu.soccerscorer.adapter.SoccerAdapter()
 private var macList: ArrayList<SoccerResponse.SoccerResponseItem> = arrayListOf()
 private lateinit var binding: ActivityMainBinding
 private var SoccerAPIService = com.kurtoglu.soccerscorer.service.SoccerAPIService()
+private lateinit var soccerViewModel: SoccerViewModel
+
 
 
 
@@ -28,6 +23,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+        soccerViewModel = ViewModelProvider(this).get(SoccerViewModel::class.java)
+
+        soccerViewModel.soccerList()
+        observableLiveData()
+
+        rv_items.layoutManager =
+            LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        rv_items.adapter = SoccerAdapter
+    }
+
+    private fun observableLiveData() {
+        soccerViewModel.soccerListLiveData.observe(this) {
+            it.forEach { res ->
+                macList.add(res)
+            }
+            SoccerAdapter.setSoccerData(macList)
+
+
+        }
+
+    }
+}
+   /*
 
         SoccerAPIService.getMaclar()
             .subscribeOn(Schedulers.newThread())
@@ -55,10 +76,10 @@ class MainActivity : AppCompatActivity() {
                     Log.i("response", "hatalı")
                 }
             })
+            */
 
 
 
-        rv_items.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        rv_items.adapter = SoccerAdapter
-    }
-}
+
+
+
